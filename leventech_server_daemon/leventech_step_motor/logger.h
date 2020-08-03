@@ -1,0 +1,62 @@
+#ifndef LOGGER
+#define LOGGER
+
+#include <stdio.h>
+
+/**@brief Log priority levels */
+
+#define LOG_LEVEL_DEBUG      0
+#define LOG_LEVEL_INFO       1
+#define LOG_LEVEL_WARNING    2
+#define LOG_LEVEL_ERROR      3
+#define LOG_LEVEL_ASSERT     4
+#define LOG_LEVEL_NONE       5
+
+/**@brief Current log level */
+#define LOG_LEVEL LOG_LEVEL_INFO
+
+#ifndef LOG_LEVEL
+    #error "LOG_LEVEL must be defined"
+#endif
+
+/**@brief Debug logger */
+
+#if (LOG_LEVEL_DEBUG >= LOG_LEVEL)
+    #define LOG_DEBUG        printf("[%s][DEBUG] ", __FUNCTION__);printf
+#else
+    #define LOG_DEBUG(...)   ((void) 0)
+#endif
+
+/**@brief Info logger */
+
+#if (LOG_LEVEL_INFO >= LOG_LEVEL)
+    #define LOG_INFO         printf("[%s][INFO] ", __FUNCTION__);printf
+#else
+    #define LOG_INFO(...)    ((void) 0)
+#endif
+
+/**@brief Warning logger */
+
+#if (LOG_LEVEL_WARNING >= LOG_LEVEL)
+    #define LOG_WARNING      printf("[%s][WARNING] ", __FUNCTION__);printf
+#else
+    #define LOG_WARNING(...) ((void) 0)
+#endif
+
+/**@brief Error logger */
+
+#if (LOG_LEVEL_ERROR >= LOG_LEVEL)
+    #define LOG_ERROR        printf("[%s][ERROR] ", __FUNCTION__);printf
+#else
+    #define LOG_ERROR(...)   ((void) 0)
+#endif
+
+/**@brief Assert logger */
+
+#if (LOG_LEVEL_ASSERT >= LOG_LEVEL)
+    #define LOG_ASSERT       printf("[%s][ASSERT] ", __FUNCTION__);printf
+#else
+    #define LOG_ASSERT(...)  ((void) 0)
+#endif
+
+#endif //LOGGER
